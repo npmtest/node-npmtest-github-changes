@@ -1,0 +1,1981 @@
+<html lang="en"><head>
+    <title>Code coverage report for node-npmtest-github-changes/node_modules/github-changes/bin/index.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-github-changes">npmtest-github-changes (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-github-changes/node_modules/github-changes/bin/index.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">23.79% <small>(69 / 290)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">4.86% <small>(9 / 185)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">22.92% <small>(11 / 48)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">25.78% <small>(66 / 256)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> » <a href="index.html">node-npmtest-github-changes/node_modules/github-changes/bin/</a> » index.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tbody><tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">//#!/usr/bin/env node
+&nbsp;
+var fs = require('fs');
+var _ = require('lodash');
+var http = require('http');
+var https = require('https');
+var domain = require('domain');
+var moment = require('moment-timezone');
+var parser = require('nomnom');
+var semver = require('semver');
+var Promise = require("bluebird");
+var GithubApi = require('github');
+var linkParser = require('parse-link-header');
+var ghauth = Promise.promisify(require('ghauth'));
+var commitStream = require('github-commit-stream');
+&nbsp;
+// Increase number of concurrent requests
+http.globalAgent.maxSockets = 30;
+https.globalAgent.maxSockets = 30;
+&nbsp;
+// It might be faster to just go through commits on the branch
+// instead of iterating over closed issues, look into this later.
+//
+// Even better yet. I might just be able to do this with git log.
+// tags: git log --tags --simplify-by-decoration --format="%ci%n%d"
+// prs: git log --grep="Merge pull request #" --format="%s%n%ci%n%b"
+&nbsp;
+&nbsp;
+// parse cli options
+opts = parser
+  .scriptName('github-changes')
+  .option('owner', {
+    abbr: 'o'
+  , help: '(required) owner of the Github repository'
+  , required: true
+  })
+  .option('repository', {
+    abbr: 'r'
+  , help: '(required) name of the Github repository'
+  , required: true
+  })
+  .option('data', {
+    abbr: 'd'
+  , help: '(DEPRECATED) use pull requests or commits (choices: pulls, commits)'
+  , choices: ['pulls', 'commits']
+  , default: 'commits'
+  })
+  .option('branch', {
+    abbr: 'b'
+  , help: 'name of the default branch'
+  , default: 'master'
+  })
+  .option('tag-name', {
+    abbr: 'n'
+  , help: 'tag name for upcoming release'
+  , default: 'upcoming'
+  })
+  .option('auth', {
+    abbr: 'a'
+  , help: 'prompt to auth with Github - use this for private repos and higher rate limits'
+  , flag: true
+  })
+  .option('token', {
+    abbr: 'k'
+  , help: 'need to use this or --auth for private repos and higher rate limits'
+  })
+  .option('file', {
+    abbr: 'f'
+  , help: 'name of the file to output the changelog to'
+  , default: 'CHANGELOG.md'
+  })
+  .option('title', {
+    abbr: 't'
+  , help: 'title to appear in the top of the changelog'
+  , default: 'Change Log'
+  })
+  .option('time-zone', {
+    abbr: 'z'
+  , help: 'time zone'
+  , default: 'UTC'
+  })
+  .option('date-format', {
+    abbr: 'm'
+  , help: 'date format'
+  , default: '(YYYY/MM/DD HH:mm Z)'
+  })
+  .option('verbose', {
+    abbr: 'v'
+  , help: 'output details'
+  , flag: true
+  })
+  .option('host', {
+    help: 'alternate host name to use with github enterprise'
+  , default: 'api.github.com'
+  })
+  .option('path-prefix', {
+    help: 'path-prefix for use with github enterprise'
+  , default: null
+  })
+  .option('between-tags', {
+    help: 'only diff between these two tags, separate by 3 dots ...'
+  })
+  .option('for-tag', {
+    help: 'only get changes for this tag'
+  })
+  .option('issue-body', {
+    help: '(DEPRECATED) include the body of the issue (--data MUST equal \'pulls\')'
+  , flag: true
+  })
+  .option('no-merges', {
+    help: 'do not include merges'
+  , flag: true
+  })
+  .option('only-merges', {
+    help: 'only include merges'
+  , flag: true
+  })
+  .option('only-pulls', {
+    help: 'only include pull requests'
+  , flag: true
+  })
+  .option('use-commit-body', {
+    help: 'use the commit body of a merge instead of the message - "Merge branch..."'
+  , flag: true
+  })
+  .option('order-semver', {
+    help: 'use semantic versioning for the ordering instead of the tag date'
+  , flag: true
+  })
+  .option('reverse-changes', {
+    help: 'reverse the order of changes within a release (show oldest first)'
+  , flag: true
+  })
+  .option('hide-tag-names', {
+    help: 'hide tag names in changelog'
+  , flag: true
+  })
+&nbsp;
+  // TODO
+  // .option('template', {
+  //   abbr: 't'
+  // , help: '(optional) template to use to generate the changelog'
+  // })
+  .parse()
+;
+&nbsp;
+<span class="missing-if-branch" title="if path not taken">I</span>if (opts['only-pulls']) <span class="cstat-no" title="statement not covered">opts.merges = true;</span>
+&nbsp;
+var betweenTags = [null, null];
+var betweenTagsNames = null;
+<span class="missing-if-branch" title="if path not taken">I</span>if (opts['between-tags']) <span class="cstat-no" title="statement not covered">betweenTagsNames = opts['between-tags'].split('...');</span>
+&nbsp;
+var forTag = opts['for-tag'];
+&nbsp;
+var commitsBySha = {}; // populated when calling getAllCommits
+var currentDate = moment();
+&nbsp;
+var github = new GithubApi({
+  version: '3.0.0'
+, timeout: 10000
+, protocol: 'https'
+, pathPrefix: opts['path-prefix']
+, host: opts.host
+});
+&nbsp;
+// github auth token
+var token = null;
+&nbsp;
+// ~/.config/changelog.json will store the token
+var authOptions = {
+  configName : 'changelog'
+, scopes     : ['user', 'public_repo', 'repo']
+};
+&nbsp;
+Promise.promisifyAll(github.repos);
+Promise.promisifyAll(github.issues);
+Promise.promisifyAll(github.pullRequests);
+&nbsp;
+// TODO: Could probably fetch releases so we don't have to get the commit data
+// for the sha of each tag to figure out the date. Could save alot on api
+// calls.
+var getTags = function(){
+  var tagOpts = {
+    user: opts.owner
+  , repo: opts.repository
+  , per_page: 100
+  };
+  auth();
+  return github.repos.getTagsAsync(tagOpts).map(<span class="fstat-no" title="function not covered">function(ref){</span>
+<span class="cstat-no" title="statement not covered">    auth();</span>
+<span class="cstat-no" title="statement not covered">    return github.repos.getCommitAsync({</span>
+      user: tagOpts.user
+    , repo: tagOpts.repo
+    , sha: ref.commit.sha
+    }).then(<span class="fstat-no" title="function not covered">function(commit){</span>
+<span class="cstat-no" title="statement not covered">      opts.verbose &amp;&amp; console.log('pulled commit data for tag - ', ref.name);</span>
+<span class="cstat-no" title="statement not covered">      var tag = {</span>
+        name: ref.name
+      , date: moment(commit.commit.committer.date)
+      };
+&nbsp;
+      // if betweenTags is specified then
+<span class="cstat-no" title="statement not covered">      if (betweenTagsNames &amp;&amp; (betweenTagsNames.indexOf(tag.name)&gt;-1)) {</span>
+<span class="cstat-no" title="statement not covered">        betweenTags[betweenTagsNames.indexOf(tag.name)] = tag;</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered">      return tag;</span>
+    });
+  }).then(<span class="fstat-no" title="function not covered">function(tags){</span>
+<span class="cstat-no" title="statement not covered">    return tags;</span>
+  });
+};
+&nbsp;
+var getPullRequests = <span class="fstat-no" title="function not covered">function(){</span>
+<span class="cstat-no" title="statement not covered">  var issueOpts = {</span>
+    user: opts.owner
+  , repo: opts.repository
+  , state: 'closed'
+  , sort: 'updated'
+  , direction: 'desc'
+  , per_page: 100
+  , page: 1
+  // , since: null // TODO: this is an improvement to save API calls
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var getIssues = <span class="fstat-no" title="function not covered">function(options){</span></span>
+<span class="cstat-no" title="statement not covered">    auth();</span>
+<span class="cstat-no" title="statement not covered">    return github.issues.repoIssuesAsync(options).then(<span class="fstat-no" title="function not covered">function(issues){</span></span>
+<span class="cstat-no" title="statement not covered">      opts.verbose &amp;&amp; console.log('issues pulled - ', issues.length);</span>
+<span class="cstat-no" title="statement not covered">      opts.verbose &amp;&amp; console.log('issues page - ', options.page);</span>
+<span class="cstat-no" title="statement not covered">      return issues;</span>
+    });
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered">  return getIssues(issueOpts).then(<span class="fstat-no" title="function not covered">function(issues){</span></span>
+<span class="cstat-no" title="statement not covered">    var linkHeader = linkParser(issues.meta.link)</span>
+<span class="cstat-no" title="statement not covered">    var totalPages = (linkHeader &amp;&amp; linkHeader.last) ? linkHeader.last.page : 1;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (totalPages &gt; issueOpts.page) {</span>
+<span class="cstat-no" title="statement not covered">      var allReqs = [];</span>
+<span class="cstat-no" title="statement not covered">      for(var i=issueOpts.page; i&lt;totalPages; i++){</span>
+<span class="cstat-no" title="statement not covered">        var newOptions = _.clone(issueOpts, true);</span>
+<span class="cstat-no" title="statement not covered">        newOptions.page += i;</span>
+<span class="cstat-no" title="statement not covered">        allReqs.push(getIssues(newOptions));</span>
+      }
+<span class="cstat-no" title="statement not covered">      return Promise.all(allReqs).reduce(<span class="fstat-no" title="function not covered">function(issues, moreIssues){</span></span>
+<span class="cstat-no" title="statement not covered">        return issues.concat(moreIssues);</span>
+      }, issues);
+    }
+<span class="cstat-no" title="statement not covered">    return issues;</span>
+  }).map(<span class="fstat-no" title="function not covered">function(issue){</span>
+<span class="cstat-no" title="statement not covered">    if (!issue.pull_request.html_url) <span class="cstat-no" title="statement not covered">return;</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    auth();</span>
+<span class="cstat-no" title="statement not covered">    return github.pullRequests.getAsync({</span>
+      user: issueOpts.user
+    , repo: issueOpts.repo
+    , number: issue.number
+    }).then(<span class="fstat-no" title="function not covered">function(pr){</span>
+<span class="cstat-no" title="statement not covered">      if (pr.base.ref !== opts.branch) <span class="cstat-no" title="statement not covered">return;</span></span>
+<span class="cstat-no" title="statement not covered">      if (!pr.merged_at) <span class="cstat-no" title="statement not covered">return;</span></span>
+<span class="cstat-no" title="statement not covered">      return pr;</span>
+    });
+  }).reduce(<span class="fstat-no" title="function not covered">function(scrubbed, pr){</span>
+<span class="cstat-no" title="statement not covered">    if (pr) <span class="cstat-no" title="statement not covered">scrubbed.push(pr);</span></span>
+<span class="cstat-no" title="statement not covered">    return scrubbed;</span>
+  }, [])
+  .then(<span class="fstat-no" title="function not covered">function(prs){</span>
+<span class="cstat-no" title="statement not covered">    return prs;</span>
+  });
+};
+&nbsp;
+var getAllCommits = function() {
+  var progress = 0;
+  opts.verbose &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered">console.log('fetching commits');</span>
+  return new Promise(function(resolve, reject){
+    var commits = [];
+    commitStream({
+      token: token
+    , host: opts.host
+    , pathPrefix: (opts['path-prefix'] == '') ? <span class="branch-0 cbranch-no" title="branch not covered">'' </span>: opts['path-prefix']
+    , user: opts.owner
+    , repo: opts.repository
+    , sha: opts.branch
+    , per_page: 100
+    }).on('data', <span class="fstat-no" title="function not covered">function(data){</span>
+<span class="cstat-no" title="statement not covered">      if (++progress % 100 == 0) {</span>
+<span class="cstat-no" title="statement not covered">        opts.verbose &amp;&amp; console.log('fetched %d commits', progress)</span>
+      }
+<span class="cstat-no" title="statement not covered">      commitsBySha[data.sha] = data;</span>
+<span class="cstat-no" title="statement not covered">      commits = commits.concat(data);</span>
+    }).on('end', <span class="fstat-no" title="function not covered">function(error){</span>
+<span class="cstat-no" title="statement not covered">      if (error) <span class="cstat-no" title="statement not covered">return reject(error);</span></span>
+<span class="cstat-no" title="statement not covered">      opts.verbose &amp;&amp; console.log('fetched all commits');</span>
+<span class="cstat-no" title="statement not covered">      return resolve(commits);</span>
+    });
+  });
+};
+&nbsp;
+var getData = function() {
+  <span class="missing-if-branch" title="else path not taken">E</span>if (opts.data === 'commits') return getAllCommits();
+<span class="cstat-no" title="statement not covered">  return getPullRequests();</span>
+};
+&nbsp;
+var tagger = <span class="fstat-no" title="function not covered">function(sortedTags, data) {</span>
+<span class="cstat-no" title="statement not covered">  var date = null;</span>
+<span class="cstat-no" title="statement not covered">  if (opts.data === 'commits') <span class="cstat-no" title="statement not covered">date = moment(data.commit.committer.date);</span></span>
+  else <span class="cstat-no" title="statement not covered">date = moment(data.merged_at);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var current = null;</span>
+<span class="cstat-no" title="statement not covered">  for (var i=0, len=sortedTags.length; i &lt; len; i++) {</span>
+<span class="cstat-no" title="statement not covered">    var tag = sortedTags[i];</span>
+<span class="cstat-no" title="statement not covered">    if (tag.date &lt; date) <span class="cstat-no" title="statement not covered">break;</span></span>
+<span class="cstat-no" title="statement not covered">    current = tag;</span>
+  }
+<span class="cstat-no" title="statement not covered">  if (!current) <span class="cstat-no" title="statement not covered">current = {name: opts['tag-name'], date: currentDate};</span></span>
+<span class="cstat-no" title="statement not covered">  return current;</span>
+};
+&nbsp;
+var prFormatter = <span class="fstat-no" title="function not covered">function(data) {</span>
+<span class="cstat-no" title="statement not covered">  var currentTagName = '';</span>
+<span class="cstat-no" title="statement not covered">  var output = "## " + opts.title + "\n";</span>
+<span class="cstat-no" title="statement not covered">  data.forEach(<span class="fstat-no" title="function not covered">function(pr){</span></span>
+<span class="cstat-no" title="statement not covered">    if (!opts['hide-tag-names']) {</span>
+<span class="cstat-no" title="statement not covered">      if (pr.tag === null) {</span>
+<span class="cstat-no" title="statement not covered">        currentTagName = opts['tag-name'];</span>
+<span class="cstat-no" title="statement not covered">        output+= "\n### " + opts['tag-name'];</span>
+<span class="cstat-no" title="statement not covered">        output+= "\n";</span>
+      } else <span class="cstat-no" title="statement not covered">if (pr.tag.name != currentTagName) {</span>
+<span class="cstat-no" title="statement not covered">        currentTagName = pr.tag.name;</span>
+<span class="cstat-no" title="statement not covered">        output+= "\n### " + pr.tag.name</span>
+<span class="cstat-no" title="statement not covered">        output+= " " + pr.tag.date.tz(opts['time-zone']).format(opts['date-format']);</span>
+<span class="cstat-no" title="statement not covered">        output+= "\n";</span>
+      }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    output += "- [#" + pr.number + "](" + pr.html_url + ") " + pr.title</span>
+<span class="cstat-no" title="statement not covered">    if (pr.user &amp;&amp; pr.user.login) <span class="cstat-no" title="statement not covered">output += " (@" + pr.user.login + ")";</span></span>
+<span class="cstat-no" title="statement not covered">    if (opts['issue-body'] &amp;&amp; pr.body &amp;&amp; pr.body.trim()) <span class="cstat-no" title="statement not covered">output += "\n\n    &gt;" + pr.body.trim().replace(/\n/ig, "\n    &gt; ") +"\n";</span></span>
+&nbsp;
+    // output += " " + moment(pr.merged_at).utc().format(opts['date-format']);
+<span class="cstat-no" title="statement not covered">    output += "\n";</span>
+  });
+<span class="cstat-no" title="statement not covered">  return output.trim();</span>
+};
+&nbsp;
+var getCommitsInMerge = <span class="fstat-no" title="function not covered">function(mergeCommit) {</span>
+  // direct descendents of the mergeCommit
+<span class="cstat-no" title="statement not covered">  var directDescendents = {};</span>
+&nbsp;
+  // store reachable commits
+<span class="cstat-no" title="statement not covered">  var store1 = {};</span>
+<span class="cstat-no" title="statement not covered">  var store2 = {};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var currentCommit = mergeCommit;</span>
+<span class="cstat-no" title="statement not covered">  while (currentCommit &amp;&amp; currentCommit.parents &amp;&amp; currentCommit.parents.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered">    directDescendents[currentCommit.parents[0].sha] = true;</span>
+<span class="cstat-no" title="statement not covered">    currentCommit = commitsBySha[currentCommit.parents[0].sha];</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var getAllReachableCommits = <span class="fstat-no" title="function not covered">function(sha, store) {</span></span>
+<span class="cstat-no" title="statement not covered">    if (!commitsBySha[sha]) <span class="cstat-no" title="statement not covered">return;</span></span>
+<span class="cstat-no" title="statement not covered">    store[sha]=true;</span>
+<span class="cstat-no" title="statement not covered">    commitsBySha[sha].parents.forEach(<span class="fstat-no" title="function not covered">function(parent){</span></span>
+<span class="cstat-no" title="statement not covered">      if (directDescendents[parent.sha]) <span class="cstat-no" title="statement not covered">return;</span></span>
+<span class="cstat-no" title="statement not covered">      if (store[parent.sha]) <span class="cstat-no" title="statement not covered">return; </span></span>// don't revist commits we've explored
+<span class="cstat-no" title="statement not covered">      return getAllReachableCommits(parent.sha, store);</span>
+    })
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var parentShas = _.pluck(mergeCommit.parents, 'sha');</span>
+<span class="cstat-no" title="statement not covered">  var notSha = parentShas.shift(); </span>// value to pass to --not flag in git log
+<span class="cstat-no" title="statement not covered">  parentShas.forEach(<span class="fstat-no" title="function not covered">function(sha){</span></span>
+<span class="cstat-no" title="statement not covered">    return getAllReachableCommits(sha, store1);</span>
+  });
+<span class="cstat-no" title="statement not covered">  getAllReachableCommits(notSha, store2);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  return _.difference(</span>
+    Object.keys(store1)
+  , Object.keys(store2)
+  ).map(<span class="fstat-no" title="function not covered">function(sha){</span>
+<span class="cstat-no" title="statement not covered">    return commitsBySha[sha];</span>
+  });
+};
+&nbsp;
+var commitFormatter = <span class="fstat-no" title="function not covered">function(data) {</span>
+<span class="cstat-no" title="statement not covered">  var currentTagName = '';</span>
+<span class="cstat-no" title="statement not covered">  var output = "## " + opts.title + "\n";</span>
+<span class="cstat-no" title="statement not covered">  data.forEach(<span class="fstat-no" title="function not covered">function(commit){</span></span>
+<span class="cstat-no" title="statement not covered">    if (betweenTagsNames &amp;&amp; commit.tag.date&lt;=betweenTags[0].date) <span class="cstat-no" title="statement not covered">return;</span></span>
+<span class="cstat-no" title="statement not covered">    if (betweenTagsNames &amp;&amp; betweenTags[1] &amp;&amp; commit.tag.date&gt;betweenTags[1].date) <span class="cstat-no" title="statement not covered">return;</span></span>
+<span class="cstat-no" title="statement not covered">    if (forTag &amp;&amp; commit.tag.name !== forTag) <span class="cstat-no" title="statement not covered">return;</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var isMerge = (commit.parents.length &gt; 1);</span>
+<span class="cstat-no" title="statement not covered">    var isPull = isMerge &amp;&amp; /^Merge pull request #/i.test(commit.commit.message);</span>
+<span class="cstat-no" title="statement not covered">    var isSquashAndMerge = false;</span>
+&nbsp;
+    // handle checking for a squash &amp; merge
+<span class="cstat-no" title="statement not covered">    if (!isPull) {</span>
+<span class="cstat-no" title="statement not covered">      isPull = /\s\(\#\d+\)/i.test(commit.commit.message); </span>//contains ' (#123)'?
+<span class="cstat-no" title="statement not covered">      if (isPull) {</span>
+<span class="cstat-no" title="statement not covered">        isMerge = true;</span>
+<span class="cstat-no" title="statement not covered">        isSquashAndMerge = true;</span>
+      }
+    }
+&nbsp;
+    // exits
+<span class="cstat-no" title="statement not covered">    if ((opts.merges === false) &amp;&amp; isMerge) <span class="cstat-no" title="statement not covered">return '';</span></span>
+<span class="cstat-no" title="statement not covered">    if ((opts['only-merges']) &amp;&amp; commit.parents.length &lt; 2) <span class="cstat-no" title="statement not covered">return '';</span></span>
+<span class="cstat-no" title="statement not covered">    if ((opts['only-pulls']) &amp;&amp; !isPull) <span class="cstat-no" title="statement not covered">return '';</span></span>
+&nbsp;
+    // choose message content
+<span class="cstat-no" title="statement not covered">    var messages = commit.commit.message.split('\n');</span>
+<span class="cstat-no" title="statement not covered">    var message = messages.shift().trim();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (!isSquashAndMerge &amp;&amp; opts['use-commit-body'] &amp;&amp; commit.parents.length &gt; 1) {</span>
+<span class="cstat-no" title="statement not covered">      message = messages.join(' ').trim() || message;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (!opts['hide-tag-names']) {</span>
+<span class="cstat-no" title="statement not covered">      if (commit.tag === null) {</span>
+<span class="cstat-no" title="statement not covered">        currentTagName = opts['tag-name'];</span>
+<span class="cstat-no" title="statement not covered">        output+= "\n### " + opts['tag-name'];</span>
+<span class="cstat-no" title="statement not covered">        output+= "\n";</span>
+      } else <span class="cstat-no" title="statement not covered">if (commit.tag.name != currentTagName) {</span>
+<span class="cstat-no" title="statement not covered">        currentTagName = commit.tag.name;</span>
+<span class="cstat-no" title="statement not covered">        output+= "\n### " + commit.tag.name</span>
+<span class="cstat-no" title="statement not covered">        output+= " " + commit.tag.date.tz(opts['time-zone']).format(opts['date-format']);</span>
+<span class="cstat-no" title="statement not covered">        output+= "\n";</span>
+      }
+    }
+&nbsp;
+    // if commit is a merge then find all commits that belong to the merge
+    // and extract authors out of those. Do this for --only-merges and for
+    // --only-pulls
+<span class="cstat-no" title="statement not covered">    var authors = {};</span>
+<span class="cstat-no" title="statement not covered">    if (isMerge &amp;&amp; (opts['only-merges'] || opts['only-pulls'])) {</span>
+<span class="cstat-no" title="statement not covered">      getCommitsInMerge(commit).forEach(<span class="fstat-no" title="function not covered">function(c){</span></span>
+        // ignore the author of a merge commit, they might have reviewed,
+        // resolved conflicts, and merged, but I don't think this alone
+        // should result in them being considered one of the authors in
+        // the pull request
+<span class="cstat-no" title="statement not covered">        if (c.parents.length &gt; 1) <span class="cstat-no" title="statement not covered">return;</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">        if (c.author &amp;&amp; c.author.login) {</span>
+<span class="cstat-no" title="statement not covered">          authors[c.author.login] = true;</span>
+        }
+      });
+    }
+<span class="cstat-no" title="statement not covered">    authors = Object.keys(authors);</span>
+&nbsp;
+    // if it's a pull request, then the link should be to the pull request
+<span class="cstat-no" title="statement not covered">    if (isPull) {</span>
+<span class="cstat-no" title="statement not covered">      var prNumber = null;</span>
+<span class="cstat-no" title="statement not covered">      var author = null;</span>
+<span class="cstat-no" title="statement not covered">      var authorName = commit.commit.author &amp;&amp; commit.commit.author.name;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">      if (isSquashAndMerge) {</span>
+<span class="cstat-no" title="statement not covered">        prNumber = commit.commit.message.match(/\(#\d+\)/)[0].replace(/\(|\)|#/g,'');</span>
+<span class="cstat-no" title="statement not covered">        author = (commit.author &amp;&amp; commit.author.login);</span>
+      } else {
+<span class="cstat-no" title="statement not covered">        prNumber = commit.commit.message.split('#')[1].split(' ')[0];</span>
+<span class="cstat-no" title="statement not covered">        author = (commit.commit.message.split(/\#\d+\sfrom\s/)[1]||'').split('/')[0];</span>
+      }
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered">      var host = (opts.host === 'api.github.com') ? 'github.com' : opts.host;</span>
+<span class="cstat-no" title="statement not covered">      var url = "https://"+host+"/"+opts.owner+"/"+opts.repository+"/pull/"+prNumber;</span>
+<span class="cstat-no" title="statement not covered">      output += "- [#" + prNumber + "](" + url + ") " + message;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">      if (authors.length) {</span>
+<span class="cstat-no" title="statement not covered">        output += ' (' + authors.map(<span class="fstat-no" title="function not covered">function(author){<span class="cstat-no" title="statement not covered"></span>return '@' + author}</span>).join(', ') + ')';</span>
+      } else <span class="cstat-no" title="statement not covered">if (author) {</span>
+<span class="cstat-no" title="statement not covered">        output += " (@" + author + ")";</span>
+      } else <span class="cstat-no" title="statement not covered">if (authorName) {</span>
+<span class="cstat-no" title="statement not covered">        output += " (" + authorName + ")";</span>
+      }
+&nbsp;
+    } else { //otherwise link to the commit
+<span class="cstat-no" title="statement not covered">      output += "- [" + commit.sha.substr(0, 7) + "](" + commit.html_url + ") " + message;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">      if (authors.length)</span>
+<span class="cstat-no" title="statement not covered">        output += ' (' + authors.map(<span class="fstat-no" title="function not covered">function(author){<span class="cstat-no" title="statement not covered"></span>return '@' + author}</span>).join(', ') + ')';</span>
+      else <span class="cstat-no" title="statement not covered">if (commit.author &amp;&amp; commit.author.login)</span>
+<span class="cstat-no" title="statement not covered">        output += " (@" + commit.author.login + ")";</span>
+    }
+&nbsp;
+    // output += " " + moment(commit.commit.committer.date).utc().format(opts['date-format']);
+<span class="cstat-no" title="statement not covered">    output += "\n";</span>
+  });
+<span class="cstat-no" title="statement not covered">  return output.trim();</span>
+};
+&nbsp;
+var formatter = <span class="fstat-no" title="function not covered">function(data) {</span>
+<span class="cstat-no" title="statement not covered">  if (opts.data === 'commits') <span class="cstat-no" title="statement not covered">return commitFormatter(data);</span></span>
+<span class="cstat-no" title="statement not covered">  return prFormatter(data);</span>
+};
+&nbsp;
+var getGithubToken = function() {
+  <span class="missing-if-branch" title="if path not taken">I</span>if (opts.token) <span class="cstat-no" title="statement not covered">return Promise.resolve({token: opts.token});</span>
+  <span class="missing-if-branch" title="if path not taken">I</span>if (opts.auth) <span class="cstat-no" title="statement not covered">return ghauth(authOptions);</span>
+  return Promise.resolve({});
+};
+&nbsp;
+var auth = function() {
+  <span class="missing-if-branch" title="else path not taken">E</span>if (!token) return;
+<span class="cstat-no" title="statement not covered">  github.authenticate({type: 'oauth', token: token});</span>
+};
+&nbsp;
+var task = function() {
+  getGithubToken()
+    .then(function(authData){
+      <span class="missing-if-branch" title="else path not taken">E</span>if (!authData.token) return;
+<span class="cstat-no" title="statement not covered">      token = authData.token;</span>
+    })
+    .then(function(){
+      return Promise.all([getTags(), getData()])
+    })
+    .spread(<span class="fstat-no" title="function not covered">function(tags, data){</span>
+<span class="cstat-no" title="statement not covered">      allTags = _.sortBy(tags, 'date').reverse();</span>
+<span class="cstat-no" title="statement not covered">      return data;</span>
+    })
+    .map(<span class="fstat-no" title="function not covered">function(data){</span>
+<span class="cstat-no" title="statement not covered">      data.tag = tagger(allTags, data);</span>
+<span class="cstat-no" title="statement not covered">      data.tagDate = data.tag.date;</span>
+<span class="cstat-no" title="statement not covered">      return data;</span>
+    })
+    .then(<span class="fstat-no" title="function not covered">function(data){</span>
+      // order by commit date DESC by default / ASC if --reverse-changes given
+<span class="cstat-no" title="statement not covered">      var compareSign = (opts['reverse-changes']) ? -1 : 1;</span>
+&nbsp;
+      // order by tag date then commit date
+<span class="cstat-no" title="statement not covered">      if (!opts['order-semver'] &amp;&amp; opts.data === 'commits') {</span>
+<span class="cstat-no" title="statement not covered">        data = data.sort(<span class="fstat-no" title="function not covered">function(a,b){</span></span>
+<span class="cstat-no" title="statement not covered">          var tagCompare = (a.tagDate - b.tagDate);</span>
+<span class="cstat-no" title="statement not covered">          return (tagCompare) ? tagCompare : compareSign * (moment(a.commit.committer.date) - moment(b.commit.committer.date));</span>
+        }).reverse();
+<span class="cstat-no" title="statement not covered">        return data;</span>
+      } else <span class="cstat-no" title="statement not covered">if (!opts['order-semver'] &amp;&amp; opts.data === 'pulls') {</span>
+<span class="cstat-no" title="statement not covered">        data = data.sort(<span class="fstat-no" title="function not covered">function(a,b){</span></span>
+<span class="cstat-no" title="statement not covered">          var tagCompare = (a.tagDate - b.tagDate);</span>
+<span class="cstat-no" title="statement not covered">          return (tagCompare) ? tagCompare : compareSign * (moment(a.merged_at) - moment(b.merged_at));</span>
+        }).reverse();
+<span class="cstat-no" title="statement not covered">        return data;</span>
+      }
+&nbsp;
+      // order by semver then commit date
+<span class="cstat-no" title="statement not covered">      data = data.sort(<span class="fstat-no" title="function not covered">function(a,b){</span></span>
+<span class="cstat-no" title="statement not covered">        var tagCompare = 0;</span>
+<span class="cstat-no" title="statement not covered">        if (a.tag.name === b.tag.name) <span class="cstat-no" title="statement not covered">tagCompare = 0;</span></span>
+        else <span class="cstat-no" title="statement not covered">if (a.tag.name === opts['tag-name']) <span class="cstat-no" title="statement not covered">tagCompare = 1;</span></span>
+        else <span class="cstat-no" title="statement not covered">if (b.tag.name === opts['tag-name']) <span class="cstat-no" title="statement not covered">tagCompare -1;</span></span>
+        else <span class="cstat-no" title="statement not covered">tagCompare = semver.compare(a.tag.name, b.tag.name);</span>
+<span class="cstat-no" title="statement not covered">        return (tagCompare) ? tagCompare : compareSign * (moment(a.commit.committer.date) - moment(b.commit.committer.date));</span>
+      }).reverse();
+<span class="cstat-no" title="statement not covered">      return data;</span>
+    })
+    .then(<span class="fstat-no" title="function not covered">function(data){</span>
+<span class="cstat-no" title="statement not covered">      fs.writeFileSync(opts.file, formatter(data));</span>
+    })
+    .then(<span class="fstat-no" title="function not covered">function(){</span>
+<span class="cstat-no" title="statement not covered">      process.exit(0);</span>
+    })
+    .catch(function(error){
+      console.error('error', error);
+      console.error('stack', error.stack);
+      process.exit(1);
+    })
+  ;
+};
+&nbsp;
+var done = <span class="fstat-no" title="function not covered">function (error) {</span>
+<span class="cstat-no" title="statement not covered">  if (!error) <span class="cstat-no" title="statement not covered">process.exit(0);</span></span>
+<span class="cstat-no" title="statement not covered">  console.log(error);</span>
+<span class="cstat-no" title="statement not covered">  console.log(error.stack);</span>
+<span class="cstat-no" title="statement not covered">  process.exit(1);</span>
+};
+&nbsp;
+var runner = function () {
+  var d = domain.create();
+  d.on('error', done);
+  d.run(task);
+};
+&nbsp;
+runner();
+&nbsp;
+&nbsp;</pre></td></tr>
+</tbody></table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Wed Apr 19 2017 16:15:20 GMT+0000 (UTC)</div>
+</div>
+
+
+</body></html>
